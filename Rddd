@@ -1,0 +1,12 @@
+function clickConnect() {
+  const el = document.querySelector('colab-connect-button');
+  if (el) {
+    const shadowRoot = el.shadowRoot;
+    const btn = shadowRoot.querySelector('#connect');
+    if (btn) {
+      btn.click();
+      console.log("🔄 Clicked 'Connect' to keep Colab alive");
+    }
+  }
+}
+setInterval(clickConnect, 60000); // Every 60 seconds
