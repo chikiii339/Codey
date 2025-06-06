@@ -1,25 +1,21 @@
 #!/bin/bash
 
-# Ensure the script is run as root
-if [ "$(whoami)" != "root" ]; then
-  echo "Please run this script with sudo:"
-  echo "sudo $0"
-  exit 1
-fi
+# Download Chrome Remote Desktop
+wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
 
-# Update and install packages
-apt-get update
-apt-get install -y xrdp xfce4 xfce4-terminal
+# Install the .deb package
+sudo apt install -y ./chrome-remote-desktop_current_amd64.deb
 
-# Configure xrdp to use xfce4
-sed -i.bak '/fi/a #xrdp multiple users configuration \nstartxfce4\n' /etc/xrdp/startwm.sh
+# Update packages
+sudo apt update
 
-# Restart xrdp service
-/etc/init.d/xrdp restart
+# Fix broken installs if any
+sudo apt --fix-broken install -y
 
-# Add user 'lwmda' if it doesn't already exist
-if id "lwmda" &>/dev/null; then
-  echo "User 'lwmda' already exists."
-else
-  adduser lwmda
-fi
+# Add the chrome-remote-desktop group
+sudo groupadd chrome-remote-desktop
+
+# Add your user to the group (replace lwmda with your actual user if different)
+sudo usermod -aG chrome-remote-desktop lwmda
+
+echo "✅ Chrome Remote Desktop setup script complete."
