@@ -1,0 +1,18 @@
+setInterval(() => {
+  const event = new MouseEvent('mousemove', {
+    bubbles: true,
+    cancelable: true,
+    clientX: Math.floor(Math.random() * window.innerWidth),
+    clientY: Math.floor(Math.random() * window.innerHeight)
+  });
+  document.dispatchEvent(event);
+
+  const ke = new KeyboardEvent('keydown', {
+    bubbles: true,
+    cancelable: true,
+    key: 'Shift'
+  });
+  document.dispatchEvent(ke);
+
+  console.log('Anti-idle event fired');
+}, 5000); // every 5 seconds
